@@ -3,6 +3,12 @@ FROM ubuntu:18.04
 LABEL maintainer="npr0n"
 
 ENV VNC_SCREEN_SIZE 1024x768
+ENV OUTPUT /output
+ENV OUT_LUSCIOUS /output/luscious
+ENV OUT_LITEROTICA /output/literotica
+ENV ENABLE_JD false
+ENV ENABLE_LOG false
+ENV ENABLE_VNC false
 
 COPY copyables /
 
@@ -19,7 +25,9 @@ RUN apt-get update \
 	&& apt-get install -y \
     python3 \
     python3-pip \
-    cron
+    cron \
+	npm \
+	nodejs
 
 ADD https://dl.google.com/linux/linux_signing_key.pub \
 	https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
@@ -46,11 +54,12 @@ RUN apt-get clean \
 		session.screen0.maxDisableMove: true\n\
 		session.screen0.defaultDeco:    NONE\n\
 	' >> /home/chrome/.fluxbox/init \
+	&& mv /usercron /home/chrome/ \
 	&& chown -R chrome:chrome /home/chrome \
-    && python3 -m pip install chrome-bookmarks luscious-downloader literotica_dl \
+    && python3 -m pip install chrome-bookmarks luscious-downloader myjdapi \
+	&& npm install -g litero \
     && systemctl enable cron \
-    && su chrome -c "echo '*/15 * * * * python3 /bookmark.py' > ~/usercron;\
-        crontab ~/usercron; rm ~/usercron"
+    && su chrome -c "crontab ~/usercron; rm ~/usercron"
 
 VOLUME [ "/home/chrome" ]
 
