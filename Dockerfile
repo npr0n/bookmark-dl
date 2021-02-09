@@ -17,11 +17,8 @@ RUN apt-get update \
 	gdebi \
 	gnupg2 \
 	fonts-noto-cjk \
-	pulseaudio \
 	supervisor \
 	x11vnc \
-	fluxbox \
-	eterm \
 	&& apt-get install -y \
     python3 \
     python3-pip \
@@ -31,15 +28,17 @@ RUN apt-get update \
 
 ADD https://dl.google.com/linux/linux_signing_key.pub \
 	https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+	https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb \
 	/tmp/
 
 RUN apt-key add /tmp/linux_signing_key.pub \
-	&& gdebi --non-interactive /tmp/google-chrome-stable_current_amd64.deb 
+	&& gdebi --non-interactive /tmp/google-chrome-stable_current_amd64.deb \
+	&& gdebi --non-interactive /tmp/chrome-remote-desktop_current_amd64.deb
 
 RUN apt-get clean \
 	&& rm -rf /var/cache/* /var/log/apt/* /var/lib/apt/lists/* /tmp/* \
 	&& addgroup --gid 1000 chrome \
-	&& useradd -m -G pulse-access -u 911 -g 1000 chrome \
+	&& useradd -u 911 -g 1000 chrome \
 	&& usermod -s /bin/bash chrome \
 	&& ln -s /crdonly /usr/local/sbin/crdonly \
 	&& ln -s /update /usr/local/sbin/update \
