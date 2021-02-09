@@ -14,6 +14,7 @@ For persistent login data I recommend manually mounting /home/chrome !
 Supported Environment variables:
 
 | Environment var | default value | what it does |
+| --------------- | ------------- | ------------ |
 | ENABLE_VNC | false | VNC is necessary for first setup and login |
 | VNC_SCREEN_SIZE | 1024x768 | default screen size for VNC setup |
 | OUTPUT | /output | default output folder, also used for logfile |
