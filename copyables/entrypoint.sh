@@ -24,7 +24,7 @@ else
   cp /etc/supervisor/conf.d/supervisord-novnc.conf /etc/supervisor/conf.d/supervisord.conf
 fi
 
-# echo if JD and LOG are enabled
+# echo if JD, LOG, CACHE are enabled
 if [ "$ENABLE_JD" = "true" ] ; then
   echo 'MyJDownloader is enabled'
 else
@@ -35,6 +35,12 @@ if [ "$ENABLE_LOG" = "true" ] ; then
   echo 'Logging is enabled'
 else
   echo 'Logging is disabled'
+fi
+
+if [ "$ENABLE_CACHE" = "true" ] ; then
+  echo 'Caching is enabled'
+else
+  echo 'Caching is disabled'
 fi
 
 # VNC default no password

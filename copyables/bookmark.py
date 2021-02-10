@@ -13,6 +13,7 @@ jd_pass = os.environ.get('JD_PASS')
 jd_device = os.environ.get('JD_DEVICE')
 enable_jd = os.environ.get('ENABLE_JD')
 enable_log = os.environ.get('ENABLE_LOG')
+enable_cache = os.environ.get('ENABLE_CACHE')
 
 # convert environment variables from strings to bools
 if "true" in enable_jd:
@@ -24,6 +25,11 @@ if "true" in enable_log:
     enable_log = True
 else:
     enable_log = False
+
+if "true" in enable_cache:
+    enable_cache = True
+else:
+    enable_cache = False
 
 # Log run start
 if enable_log:
