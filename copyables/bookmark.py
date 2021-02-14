@@ -93,6 +93,9 @@ for url in chrome_bookmarks.urls:
             url = url.url.replace("/beta/s/", "/s/")
         else:
             url = url.url
+        # remove page number from url
+        if "?page=" in url:
+            url = url.split("?",1)[0]
         cmd = f"cd {out_literotica} && litero_getstory -u {url}"
     
     # Pornhub
