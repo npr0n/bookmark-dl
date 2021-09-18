@@ -79,4 +79,18 @@ cp /envsource.sh /home/chrome
 chown chrome:chrome /home/chrome/envsource.sh
 chmod +x /home/chrome/envsource.sh
 
+# check if target folders are present
+if [[ -d $OUT_LUSCIOUS ]]; then
+  echo "Target $OUT_LUSCIOUS exists."
+else
+  echo "Target $OUT_LUSCIOUS DOES NOT EXIST. CHECK DOCKER MAPPING IF THIS IS NOT THE FIRST RUN! Creating..."
+  mkdir -p $OUT_LUSCIOUS
+fi
+if [[ -d $OUT_LITEROTICA ]]; then
+  echo "Target $OUT_LITEROTICA exists."
+else
+  echo "Target $OUT_LITEROTICA DOES NOT EXIST. CHECK DOCKER MAPPING IF THIS IS NOT THE FIRST RUN! Creating..."
+  mkdir -p $OUT_LITEROTICA
+fi
+
 exec "$@"
