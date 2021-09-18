@@ -4,6 +4,7 @@ import datetime
 import getpass
 import os
 import myjdapi
+import sqlite3
 
 output = os.environ.get('OUTPUT')
 out_luscious = os.environ.get('OUT_LUSCIOUS')
